@@ -11,7 +11,11 @@ except according to the terms contained in the LICENSE file.
 -->
 <template>
   <div class="infonav-button dropdown">
-    <button :id="toggleId" type="button" class="btn-link dropdown-toggle" data-toggle="dropdown"
+    <router-link v-if="link != null" :to="link">
+      <span :class="icon"></span>
+      {{ title }}
+    </router-link>
+    <button v-else :id="toggleId" type="button" class="btn-link dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="menu" aria-expanded="false">
       <span :class="icon"></span>
       {{ title }}

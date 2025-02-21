@@ -24,6 +24,7 @@ except according to the terms contained in the LICENSE file.
               </div>
               <infonav v-if="formDatasetDiff.dataExists" :title="updatesDatasetTitle"
                 :items="updatedDatasets"/>
+              <infonav v-if="appUserCount.dataExists" :title="appUserCountTitle" :link="projectPath('form-access')"/>
             </div>
           </div>
         </div>
@@ -127,14 +128,14 @@ export default {
   setup() {
     // The component does not assume that this data will exist when the
     // component is created.
-    const { project, form, formDraft, formDatasetDiff, attachments, publishedAttachments, resourceStates } = useRequestData();
+    const { project, form, formDraft, formDatasetDiff, attachments, appUserCount, publishedAttachments, resourceStates } = useRequestData();
     const { dataExists } = resourceStates([project, form, formDraft, attachments]);
 
     const { projectPath, formPath, canRoute } = useRoutes();
     const { tabPath, tabClass } = useTabs(formPath());
     return {
       project, form, formDraft, attachments, dataExists,
-      formDatasetDiff, publishedAttachments,
+      appUserCount, formDatasetDiff, publishedAttachments,
       projectPath, formPath, canRoute, tabPath, tabClass
     };
   },
@@ -162,6 +163,9 @@ export default {
     },
     updatesDatasetTitle() {
       return this.$t('infoNav.entityLists', { count: this.updatedDatasets.length });
+    },
+    appUserCountTitle() {
+      return this.$t('infoNav.appUsers', { count: this.appUserCount.data });
     }
   },
   methods: {
@@ -266,6 +270,7 @@ $tab-li-margin-top: 5px;
     },
     "infoNav": {
       "entityLists": "Updates {count} Entity List | Updates {count} Entity Lists",
+      "appUsers": "{count} App User assigned | {count} App Users assigned",
     }
   }
 }

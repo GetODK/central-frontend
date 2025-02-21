@@ -3062,6 +3062,9 @@
       "infoNav": {
         "entityLists": {
           "string": "{count, plural, one {Updates {count} Entity List} other {Updates {count} Entity Lists}}"
+        },
+        "appUsers": {
+          "string": "{count, plural, one {{count} App User assigned} other {{count} App Users assigned}}"
         }
       }
     },
