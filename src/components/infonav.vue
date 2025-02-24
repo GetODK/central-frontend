@@ -12,27 +12,17 @@ except according to the terms contained in the LICENSE file.
 <template>
   <div class="infonav-button dropdown">
     <router-link v-if="link != null" :to="link">
-      <span :class="icon"></span>
-      {{ title }}
+      <slot name="title"></slot>
     </router-link>
     <button v-else :id="toggleId" type="button" class="btn-link dropdown-toggle" data-toggle="dropdown"
       aria-haspopup="menu" aria-expanded="false">
-      <span :class="icon"></span>
-      {{ title }}
-      <span class="icon-angle-down"></span>
+      <a href="#">
+        <slot name="title"></slot>
+        <span class="icon-angle-down"></span>
+      </a>
     </button>
     <ul class="dropdown-menu" :aria-labelledby="toggleId">
-      <template v-for="item in items" :key="item.id">
-        <li v-if="item.type === 'dataset'">
-          <dataset-link :name="item.name" :project-id="item.projectId"/>
-        </li>
-        <li v-if="item.type === 'form'">
-          <form-link
-          :form="item.form"
-          :to="publishedFormPath(item.form.projectId, item.form.xmlFormId)" v-tooltip.text/>
-        </li>
-        <!--todo: handle entity type-->
-      </template>
+      <slot name="dropdown"></slot>
     </ul>
   </div>
 </template>
@@ -42,22 +32,8 @@ except according to the terms contained in the LICENSE file.
 let id = 1;
 </script>
 <script setup>
-import FormLink from './form/link.vue';
-import DatasetLink from './dataset/link.vue';
-import useRoutes from '../composables/routes';
-
-const { publishedFormPath } = useRoutes();
 
 defineProps({
-  icon: {
-    type: String,
-    default: 'icon-magic-wand'
-  },
-  title: {
-    type: String,
-    required: true
-  },
-
   // If a link is provided, the button will navigate to that link when clicked instead of dropping down.
   link: String,
 
