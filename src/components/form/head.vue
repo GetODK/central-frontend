@@ -26,12 +26,16 @@ except according to the terms contained in the LICENSE file.
                   <span class="icon-magic-wand"></span>{{ updatesDatasetTitle }}
                 </template>
                 <template #dropdown>
-                  <li v-if="updatedDatasets.length > 0">Updated datasets:</li>
+                  <li v-if="updatedDatasets.length > 0">
+                    <span class="dropdown-header">{{ $t('infoNav.attachedDatasets') }}</span>
+                  </li>
                   <li v-for="dataset in updatedDatasets" :key="dataset.name">
                     <dataset-link :name="dataset.name" :project-id="project.id"/>
                   </li>
                   <li v-if="updatedDatasets.length > 0 && consumedDatasets.length > 0"><hr class="dropdown-divider"></li>
-                  <li v-if="consumedDatasets.length > 0">Attached datasets:</li>
+                  <li v-if="consumedDatasets.length > 0">
+                    <span class="dropdown-header">{{ $t('infoNav.consumedDatasets') }}</span>
+                  </li>
                   <li v-for="dataset in consumedDatasets" :key="dataset.name">
                     <dataset-link :name="dataset.name" :project-id="project.id"/>
                   </li>
@@ -289,7 +293,9 @@ $tab-li-margin-top: 5px;
       },
     },
     "infoNav": {
-      "entityLists": "Updates {count} Entity List | Updates {count} Entity Lists",
+      "entityLists": "Linked to {count} Entity List | Linked to {count} Entity Lists",
+      "attachedDatasets": "Attached Datasets",
+      "consumedDatasets": "Consumed Datasets",
       "appUsers": "{count} App User assigned | {count} App Users assigned",
     }
   }

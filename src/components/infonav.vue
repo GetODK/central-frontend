@@ -56,5 +56,18 @@ const toggleId = `${idPrefix}-toggle`;
     margin-left: 10px;
     font-size: 15px;
     white-space: nowrap;
+
+    .icon-angle-down {
+      margin-left: 5px;
+    }
+  }
+
+  .dropdown-menu {
+    font-size: 15px;
+  }
+
+  .dropdown-divider {
+    margin-top: 0px;
+    margin-bottom: 0px;
   }
 </style>

@@ -16,10 +16,10 @@ except according to the terms contained in the LICENSE file.
       <template #title>{{ submission.dataExists ? submission.instanceNameOrId : '' }}</template>
       <template #infonav>
         <infonav>
-          <template #title><span class="icon-magic-wand"></span>{{ updatesDatasetTitle }}</template>
+          <template #title><span class="icon-magic-wand"></span>{{ infonavTitle }}</template>
           <template #dropdown>
-            <li v-for="dataset in updatedDatasets" :key="dataset.name">
-              <dataset-link :name="dataset.name" :project-id="projectId"/>
+            <li v-for="entity in entities" :key="entity.uuid">
+              <entity-link :dataset="entity.dataset" :entity="entity" :project-id="projectId"/>
             </li>
           </template>
         </infonav>
@@ -51,7 +51,7 @@ except according to the terms contained in the LICENSE file.
 import { useI18n } from 'vue-i18n';
 
 import Breadcrumbs from '../breadcrumbs.vue';
-import DatasetLink from '../dataset/link.vue';
+import EntityLink from '../entity/link.vue';
 import Infonav from '../infonav.vue';
 import Loading from '../loading.vue';
 import PageBody from '../page/body.vue';
@@ -74,7 +74,7 @@ export default {
   name: 'SubmissionShow',
   components: {
     Breadcrumbs,
-    DatasetLink,
+    EntityLink,
     Infonav,
     Loading,
     PageBody,
@@ -127,14 +127,14 @@ export default {
         { text: this.form.dataExists ? this.form.nameOrId : this.$t('resource.form'), path: this.formPath('submissions') }
       ];
     },
-    updatedDatasets() {
+    entities() {
       return this.audits.dataExists
         ? this.audits.filter(audit => audit?.details?.entity?.dataset != null)
-          .map(audit => ({ name: audit.details.entity.dataset }))
+          .map(audit => audit.details.entity)
         : [];
     },
-    updatesDatasetTitle() {
-      return this.$t('infoNav.entityLists', { count: this.updatedDatasets.length });
+    infonavTitle() {
+      return this.$t('infoNav.entities', { count: this.entities.length });
     }
   },
   created() {
@@ -234,8 +234,8 @@ export default {
       "back": "Back to Submissions Table"
     },
     "infoNav": {
-      // TODO: i know this should be combined with the other infoNav strings
-      "entityLists": "Updates {count} Entity List | Updates {count} Entity Lists",
+      // TODO: do logic to figure out which to say (create or update)
+      "entities": "Updates/Creates {count} Entity | Updates/Creates {count} Entities",
     }
   }
 }
