@@ -4771,6 +4771,12 @@
           "string": "Back to Submissions Table",
           "developer_comment": "This is shown at the top of the page."
         }
+      },
+      "infoNav": {
+        "entityLists": {
+          "string": "{count, plural, one {Updates {count} Entity List} other {Updates {count} Entity Lists}}",
+          "developer_comment": "TODO: i know this should be combined with the other infoNav strings"
+        }
       }
     },
     "SubmissionTable": {

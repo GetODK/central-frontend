@@ -177,7 +177,7 @@ export default {
     },
     consumedDatasets() {
       return this.publishedAttachments.data
-        .filter(attachment => attachment.dataExists)
+        .filter(attachment => attachment.datasetExists)
         .map(attachment => ({ name: attachment.name.replace(/.csv/, '') }));
     },
     updatedDatasets() {
