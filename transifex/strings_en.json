@@ -3058,6 +3058,20 @@
           "string": "Draft",
           "developer_comment": "This text appears on its own and is not part of a longer sentence. It may be shown as a title, for example, at the top of the page."
         }
+      },
+      "infoNav": {
+        "entityLists": {
+          "string": "{count, plural, one {Linked to {count} Entity List} other {Linked to {count} Entity Lists}}"
+        },
+        "attachedDatasets": {
+          "string": "Attached Datasets"
+        },
+        "consumedDatasets": {
+          "string": "Consumed Datasets"
+        },
+        "appUsers": {
+          "string": "{count, plural, one {{count} App User assigned} other {{count} App Users assigned}}"
+        }
       }
     },
     "FormList": {
@@ -4768,6 +4782,12 @@
         "back": {
           "string": "Back to Submissions Table",
           "developer_comment": "This is shown at the top of the page."
+        }
+      },
+      "infoNav": {
+        "entities": {
+          "string": "{count, plural, one {Updates/Creates {count} Entity} other {Updates/Creates {count} Entities}}",
+          "developer_comment": "TODO: do logic to figure out which to say (create or update)"
         }
       }
     },

@@ -14,6 +14,16 @@ except according to the terms contained in the LICENSE file.
     <breadcrumbs v-if="dataExists" :links="breadcrumbLinks"/>
     <page-head v-show="dataExists">
       <template #title>{{ submission.dataExists ? submission.instanceNameOrId : '' }}</template>
+      <template #infonav>
+        <infonav>
+          <template #title><span class="icon-magic-wand"></span>{{ infonavTitle }}</template>
+          <template #dropdown>
+            <li v-for="entity in entities" :key="entity.uuid">
+              <entity-link :dataset="entity.dataset" :entity="entity" :project-id="projectId"/>
+            </li>
+          </template>
+        </infonav>
+      </template>
     </page-head>
     <page-body>
       <loading :state="initiallyLoading"/>
@@ -41,6 +51,8 @@ except according to the terms contained in the LICENSE file.
 import { useI18n } from 'vue-i18n';
 
 import Breadcrumbs from '../breadcrumbs.vue';
+import EntityLink from '../entity/link.vue';
+import Infonav from '../infonav.vue';
 import Loading from '../loading.vue';
 import PageBody from '../page/body.vue';
 import PageHead from '../page/head.vue';
@@ -62,6 +74,8 @@ export default {
   name: 'SubmissionShow',
   components: {
     Breadcrumbs,
+    EntityLink,
+    Infonav,
     Loading,
     PageBody,
     PageHead,
@@ -112,6 +126,15 @@ export default {
         { text: this.$t('resource.forms'), path: this.projectPath(), icon: 'icon-file' },
         { text: this.form.dataExists ? this.form.nameOrId : this.$t('resource.form'), path: this.formPath('submissions') }
       ];
+    },
+    entities() {
+      return this.audits.dataExists
+        ? this.audits.filter(audit => audit?.details?.entity?.dataset != null)
+          .map(audit => audit.details.entity)
+        : [];
+    },
+    infonavTitle() {
+      return this.$t('infoNav.entities', { count: this.entities.length });
     }
   },
   created() {
@@ -209,6 +232,10 @@ export default {
     "back": {
       "title": "Submission Detail",
       "back": "Back to Submissions Table"
+    },
+    "infoNav": {
+      // TODO: do logic to figure out which to say (create or update)
+      "entities": "Updates/Creates {count} Entity | Updates/Creates {count} Entities",
     }
   }
 }
