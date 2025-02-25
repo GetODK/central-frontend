@@ -17,8 +17,7 @@ except according to the terms contained in the LICENSE file.
         <div class="row">
           <!-- Using .col-xs-6 so that if the form name is long, it is not
           behind #form-head-draft-nav. -->
-          <div class="col-xs-6">
-            <div class="form-head-form-title">
+          <div class="col-xs-6 form-head-form-title">
               <div v-if="form.dataExists" class="h1" v-tooltip.text>
                 {{ form.nameOrId }}
               </div>
@@ -41,7 +40,6 @@ except according to the terms contained in the LICENSE file.
               <infonav v-if="appUserCount.dataExists" :link="projectPath('form-access')">
                 <template #title><span class="icon-user"></span>{{ appUserCountTitle }}</template>
               </infonav>
-            </div>
           </div>
         </div>
         <div class="row">

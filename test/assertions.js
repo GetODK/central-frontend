@@ -211,6 +211,8 @@ addAsyncMethod('tooltip', async function tooltip(text = undefined) {
   element.dispatchEvent(new MouseEvent('mouseenter'));
   await wait();
   const tooltips = document.querySelectorAll('.tooltip.in');
+  // eslint-disable-next-line no-console
+  console.log('toolips', tooltips);
   this.assert(
     tooltips.length !== 0,
     'expected the element to have a tooltip',

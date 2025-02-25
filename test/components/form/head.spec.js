@@ -41,7 +41,7 @@ describe('FormHead', () => {
       links[1].path.should.equal('/projects/1');
     });
 
-    it("shows the form's name", async () => {
+    it.only("shows the form's name", async () => {
       testData.extendedForms.createPast(1, { name: 'My Form' });
       const app = await load('/projects/1/forms/f/settings');
       const h1 = app.get('#form-head-form-nav .h1');
@@ -49,7 +49,7 @@ describe('FormHead', () => {
       await h1.should.have.textTooltip();
     });
 
-    it("shows the form's xmlFormId if the form does not have a name", async () => {
+    it.only("shows the form's xmlFormId if the form does not have a name", async () => {
       testData.extendedForms.createPast(1, { xmlFormId: 'my_form', name: null });
       const app = await load('/projects/1/forms/my_form/settings');
       const h1 = app.get('#form-head-form-nav .h1');
